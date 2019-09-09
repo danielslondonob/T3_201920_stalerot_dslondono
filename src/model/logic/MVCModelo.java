@@ -155,6 +155,18 @@ public class MVCModelo
 			ordenamientoQuickSort(arr, indiceParticion + 1, fin );
 		}
 		
+		//Calcular el tiempo
+		long comienzo = System.currentTimeMillis();
+
+	      long total = 0;
+	      for (int i = 0; i < 10000000; i++) {
+	         total += i;
+	      }
+
+	      long parada = System.currentTimeMillis();
+	      long tiempoCorrido = parada - comienzo;
+	      System.out.println(tiempoCorrido);
+		
 	}
 	
 	private int particion( int arr[], int inicio, int fin ) 
