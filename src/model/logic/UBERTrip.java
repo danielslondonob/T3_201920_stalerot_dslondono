@@ -59,15 +59,16 @@ public class UBERTrip implements Comparable<UBERTrip>
 		return geometricStandardDeviationTravelTime;
 	}
 	
-	public int compareTo( double pMeanTravelTime) 
+		public int compareTo( double pMeanTravelTime) 
 	{
+		int x = 0; 
 		if( meanTravelTime < pMeanTravelTime ) 
 		{
-			return -1;
+			x= -1;
 		}
 		else if( meanTravelTime > pMeanTravelTime) 
 		{
-			return 1;
+			x=  1;
 		}
 		
 		else 
@@ -76,23 +77,29 @@ public class UBERTrip implements Comparable<UBERTrip>
 			{
 				if( pMeanTravelTime == standardDeviationTravelTime ) 
 				{
-					return 0;
+					x =0;
 				}
 				
 				else if(pMeanTravelTime > standardDeviationTravelTime ) 
 				{
-					return -1;
+					x= -1;
 				}
 				
 				else 
 				{
 					if(pMeanTravelTime < standardDeviationTravelTime) 
 					{
-						return 1; 
+						x = 1; 
 					}
+					
+					x = 0;	
 				}
 			}
+			
+			x = 0;
 		}
+		
+		return x; 
 	}
 	
 	
