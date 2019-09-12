@@ -5,24 +5,24 @@ import java.util.NoSuchElementException;
 // Implementacion de LinkedQueue basada en el libro Algorithms 4th edition :https://algs4.cs.princeton.edu/home/
 
 
-public interface LinkedQueue<UBERTrip> implements Iterable<UBERTrip> 
+public interface ILinkedQueue<Item> extends Iterable<Item> 
 {
     boolean isEmpty();
 
     int size();
 
-    UBERTrip peek();
+    Item peek();
 
-    UBERTrip bottom();
+    Item bottom();
 
-    void agregar(UBERTrip UBERTrip);
+    void agregar(Item item);
 
-    UBERTrip eliminar();
+    Item eliminar();
 
     String toString();
 
     boolean check();
 
-    Iterator<UBERTrip> iterator();
+    Iterator<Item> iterator();
 
 }

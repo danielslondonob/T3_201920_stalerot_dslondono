@@ -2,7 +2,7 @@ package model.data_structures;
 
 import java.util.Iterator;
 
-public interface IQueue <UBERTrip>
+public interface IQueue <Item> extends Iterable<Item>
 {
 	//Metodos de la clase Queue.java
 
@@ -13,7 +13,7 @@ public interface IQueue <UBERTrip>
 
 	Item peek();
 
-	void enqueue(UBERTrip uberTrip);
+	void enqueue(Item item);
 
 	Item dequeue();
 

@@ -2,7 +2,7 @@ package model.data_structures;
 
 import java.util.Iterator;
 
-public interface IStack <UBERTrip>
+public interface IStack <Item> extends Iterable <Item>
 {
 	//Lista de metodos de la clase Stack.java
 
@@ -10,15 +10,15 @@ public interface IStack <UBERTrip>
 
 	int size();
 
-	void push (UBERTrip UBERTrip);
+	void push (Item item);
 
-	UBERTrip pop();
+	Item pop();
 
-	UBERTrip peek();
+	Item peek();
 
 	String toString();
 
-	Iterator<UBERTrip> iterator();
+	Iterator<Item> iterator();
 
 	
 

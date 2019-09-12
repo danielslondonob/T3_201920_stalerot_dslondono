@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 // Implementacion de LinkedQueue basada en el libro Algorithms 4th edition :https://algs4.cs.princeton.edu/home/
 
 
-public class LinkedQueue<UBERTrip> implements Iterable<UBERTrip> 
+public class LinkedQueue<Item> implements Iterable<Item> 
 {
     /*
     *
@@ -28,7 +28,7 @@ public class LinkedQueue<UBERTrip> implements Iterable<UBERTrip>
     */
     private class Node 
     {
-        private UBERTrip UBERTrip;
+        private Item nodo;
 
         private Node siguiente;
     }
@@ -67,10 +67,10 @@ public class LinkedQueue<UBERTrip> implements Iterable<UBERTrip>
      * @return El elemento agregado más viejo
      * @throws java.util.NoSuchElementException si el queue está vacío
      */
-    public UBERTrip peek() 
+    public Item peek() 
     {
         if (isEmpty()) throw new NoSuchElementException("Desbordamiento de Queue");
-        return primero.UBERTrip;
+        return primero.nodo;
     }
     
     /**
@@ -78,21 +78,21 @@ public class LinkedQueue<UBERTrip> implements Iterable<UBERTrip>
      * @return El último elemento agregado
      * @throws java.util.NoSuchElementException si el queue está vacío
      */
-    public UBERTrip bottom() 
+    public Item bottom() 
     {
         if (isEmpty()) throw new NoSuchElementException("Desbordamiento de Queue");
-        return ultimo.UBERTrip;
+        return ultimo.nodo;
     }
 
     /**
      * Agrega un elemento al final del queue
      * @param UBERTrip UBERTrip a agregar
      */
-    public void agregar(UBERTrip UBERTrip) 
+    public void agregar(Object objeto) 
     {
         Node pUltimo = ultimo;
         ultimo = new Node();
-        ultimo.UBERTrip = UBERTrip;
+        ultimo.nodo = (Item) objeto;
         ultimo.siguiente = null;
         if (isEmpty()) primero = ultimo;
         else           pUltimo.siguiente = ultimo;
@@ -105,10 +105,10 @@ public class LinkedQueue<UBERTrip> implements Iterable<UBERTrip>
      * @return El elemento en esta queue que fue el ultimo agregado
      * @throws java.util.NoSuchElementException si el queue esta vacio
      */
-    public UBERTrip eliminar() 
+    public Item eliminar() 
     {
         if (isEmpty()) throw new NoSuchElementException("Queue underflow");
-        UBERTrip UBERTrip = primero.UBERTrip;
+        Item UBERTrip = primero.nodo;
         primero = primero.siguiente;
         n--;
         if (isEmpty()) ultimo = null;   
@@ -124,7 +124,7 @@ public class LinkedQueue<UBERTrip> implements Iterable<UBERTrip>
     public String toString() 
     {
         StringBuilder s = new StringBuilder();
-        for (UBERTrip UBERTrip : this)
+        for (Item UBERTrip : this)
             s.append(UBERTrip + " ");
         return s.toString();
     } 
@@ -173,22 +173,22 @@ public class LinkedQueue<UBERTrip> implements Iterable<UBERTrip>
      * Returns an iterator that iterates over the UBERTrips in this queue in FIFO order.
      * @return an iterator that iterates over the UBERTrips in this queue in FIFO order
      */
-    public Iterator<UBERTrip> iterator()  
+    public Iterator<Item> iterator()  
     {
-        return new ListIterator();  
+        return (Iterator<Item>) new ListIterator();  
     }
 
     // an iterator, doesn't implement remove() since it's optional
     //Clase Iterator
-    private class ListIterator implements Iterator<UBERTrip> {
+    private class ListIterator implements Iterator<Item> {
         private Node current = primero;
 
         public boolean hasNext()  { return current != null;                     }
 
 
-        public UBERTrip next() {
+        public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            UBERTrip UBERTrip = current.UBERTrip;
+            Item UBERTrip = current.nodo;
             current = current.siguiente; 
             return UBERTrip;
         }

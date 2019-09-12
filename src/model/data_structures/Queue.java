@@ -10,17 +10,17 @@ import java.util.NoSuchElementException;
  *  @author Kevin Wayne
  */
 
-public class Queue<UBERTrip> implements IQueue,Iterable<UBERTrip> {
-    private Node<UBERTrip> primero;    // comienzo del queue
-    private Node<UBERTrip> ultimo;     // fin del queue
+public class Queue<Item> implements IQueue{
+    private Node<Item> primero;    // comienzo del queue
+    private Node<Item> ultimo;     // fin del queue
     private int n;               // numero de elementos en el queue
 
     // helper linked list class
 
-    private static class Node<UBERTrip> 
+    private static class Node<Item> 
     {
-        private UBERTrip UBERTrip;
-        private Node<UBERTrip> next;
+        private Item node;
+        private Node<Item> next;
     }
 
     /**
@@ -56,9 +56,9 @@ public class Queue<UBERTrip> implements IQueue,Iterable<UBERTrip> {
      * @return the UBERTrip least recently added to this queue
      * @throws NoSuchElementException if this queue is empty
      */
-    public UBERTrip peek() {
+    public Item peek() {
         if (isEmpty()) throw new NoSuchElementException("Queue underflow");
-        return primero.UBERTrip;
+        return primero.node;
     }
 
     /**
@@ -66,10 +66,10 @@ public class Queue<UBERTrip> implements IQueue,Iterable<UBERTrip> {
      *
      * @param  UBERTrip the UBERTrip to add
      */
-    public void enqueue(Object UBERTrip) {
-        Node<UBERTrip> oldultimo = ultimo;
-        ultimo = new Node<UBERTrip>();
-        ultimo.UBERTrip = (UBERTrip)UBERTrip;
+    public void enqueue(Object objeto) {
+        Node<Item> oldultimo = ultimo;
+        ultimo = new Node<Item>();
+        ultimo.node = (Item)objeto;
         ultimo.next = null;
         if (isEmpty()) primero = ultimo;
         else           oldultimo.next = ultimo;
@@ -82,13 +82,13 @@ public class Queue<UBERTrip> implements IQueue,Iterable<UBERTrip> {
      * @return the UBERTrip on this queue that was least recently added
      * @throws NoSuchElementException if this queue is empty
      */
-    public UBERTrip dequeue() {
+    public Item dequeue() {
         if (isEmpty()) throw new NoSuchElementException("Queue underflow");
-        UBERTrip UBERTrip = primero.UBERTrip;
+        Item objeto = primero.node;
         primero = primero.next;
         n--;
         if (isEmpty()) ultimo = null;   // to avoid loitering
-        return UBERTrip;
+        return objeto;
     }
 
     /**
@@ -98,8 +98,8 @@ public class Queue<UBERTrip> implements IQueue,Iterable<UBERTrip> {
      */
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (UBERTrip UBERTrip : this) {
-            s.append(UBERTrip);
+        for (Object objeto : this) {
+            s.append(objeto);
             s.append(' ');
         }
         return s.toString();
@@ -110,24 +110,24 @@ public class Queue<UBERTrip> implements IQueue,Iterable<UBERTrip> {
      *
      * @return an iterator that iterates over the UBERTrips in this queue in FIFO order
      */
-    public Iterator<UBERTrip> iterator()  {
-        return new ListIterator(primero);  
+    public Iterator<Item> iterator()  {
+        return (Iterator<Item>) new ListIterator(primero);  
     }
 
     // an iterator, doesn't implement remove() since it's optional
-    private class ListIterator implements Iterator<UBERTrip> {
-        private Node<UBERTrip> current;
+    private class ListIterator implements Iterator<Item> {
+        private Node<Item> current;
 
-        public ListIterator(Node<UBERTrip> primero) {
+        public ListIterator(Node<Item> primero) {
             current = primero;
         }
 
         public boolean hasNext()  { return current != null;                     }
         public void remove()      { throw new UnsupportedOperationException();  }
 
-        public UBERTrip next() {
+        public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            UBERTrip UBERTrip = current.UBERTrip;
+            Item UBERTrip = current.node;
             current = current.next; 
             return UBERTrip;
         }

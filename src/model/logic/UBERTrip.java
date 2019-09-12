@@ -59,35 +59,35 @@ public class UBERTrip implements Comparable<UBERTrip>
 		return geometricStandardDeviationTravelTime;
 	}
 	
-		public int compareTo( double pMeanTravelTime) 
+		public int compareTo( UBERTrip viaje) 
 	{
 		int x = 0; 
-		if( meanTravelTime < pMeanTravelTime ) 
+		if( meanTravelTime < viaje.geometricMeanTravelTime ) 
 		{
 			x= -1;
 		}
-		else if( meanTravelTime > pMeanTravelTime) 
+		else if( meanTravelTime > viaje.geometricMeanTravelTime) 
 		{
 			x=  1;
 		}
 		
 		else 
 		{
-			if(meanTravelTime == pMeanTravelTime ) 
+			if(meanTravelTime == viaje.geometricMeanTravelTime ) 
 			{
-				if( pMeanTravelTime == standardDeviationTravelTime ) 
+				if( viaje.standardDeviationTravelTime == standardDeviationTravelTime ) 
 				{
 					x =0;
 				}
 				
-				else if(pMeanTravelTime > standardDeviationTravelTime ) 
+				else if(viaje.standardDeviationTravelTime > standardDeviationTravelTime ) 
 				{
 					x= -1;
 				}
 				
 				else 
 				{
-					if(pMeanTravelTime < standardDeviationTravelTime) 
+					if(viaje.standardDeviationTravelTime < standardDeviationTravelTime) 
 					{
 						x = 1; 
 					}

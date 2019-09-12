@@ -11,15 +11,15 @@ import java.util.NoSuchElementException;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class Stack<UBERTrip> implements  IStack,Iterable<UBERTrip> {
-    private Node<UBERTrip> primero;     // parte superior del stack 
+public class Stack<Item> implements  IStack {
+    private Node<Item> primero;     // parte superior del stack 
     private int n;                // tamaño del stack
 
     // helper linked list class
-    private static class Node<UBERTrip> 
+    private static class Node<Item> 
     {
-        private UBERTrip UBERTrip;
-        private Node<UBERTrip> siguiente;
+        private Item node;
+        private Node<Item> siguiente;
     }
 
     /**
@@ -55,11 +55,11 @@ public class Stack<UBERTrip> implements  IStack,Iterable<UBERTrip> {
      *
      * @param  UBERTrip el UBERTrip para agregar
      */
-    public void push(Object UBERTrip) {
+    public void push(Object objeto) {
     
-        Node<UBERTrip> oldprimero = primero;
-        primero = new Node<UBERTrip>();
-        primero.UBERTrip = (UBERTrip)UBERTrip;
+        Node<Item> oldprimero = primero;
+        primero = new Node<Item>();
+        primero.node = (Item)objeto;
         primero.siguiente = oldprimero;
         n++;
     }
@@ -70,12 +70,12 @@ public class Stack<UBERTrip> implements  IStack,Iterable<UBERTrip> {
      * @return the UBERTrip most recently added
      * @throws NoSuchElementException if this stack is empty
      */
-    public UBERTrip pop() {
+    public Item pop() {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
-        UBERTrip UBERTrip = primero.UBERTrip;        // save UBERTrip to return
+        Item objeto = primero.node;        // save UBERTrip to return
         primero = primero.siguiente;            // delete primero node
         n--;
-        return UBERTrip;                   // return the saved UBERTrip
+        return objeto;                   // return the saved UBERTrip
     }
 
 
@@ -85,9 +85,9 @@ public class Stack<UBERTrip> implements  IStack,Iterable<UBERTrip> {
      * @return the UBERTrip most recently added to this stack
      * @throws NoSuchElementException if this stack is empty
      */
-    public UBERTrip peek() {
+    public Item peek() {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
-        return primero.UBERTrip;
+        return primero.node;
     }
 
     /**
@@ -97,7 +97,7 @@ public class Stack<UBERTrip> implements  IStack,Iterable<UBERTrip> {
      */
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (UBERTrip UBERTrip : this) {
+        for (Object UBERTrip : this) {
             s.append(UBERTrip);
             s.append(' ');
         }
@@ -110,15 +110,15 @@ public class Stack<UBERTrip> implements  IStack,Iterable<UBERTrip> {
      *
      * @return an iterator to this stack that iterates through the UBERTrips in LIFO order
      */
-    public Iterator<UBERTrip> iterator() {
-        return new ListIterator(primero);
+    public Iterator<Item> iterator() {
+        return (Iterator<Item>) new ListIterator(primero);
     }
 
     // an iterator, doesn't implement remove() since it's optional
-    private class ListIterator implements Iterator<UBERTrip> {
-        private Node<UBERTrip> current;
+    private class ListIterator implements Iterator<Item> {
+        private Node<Item> current;
 
-        public ListIterator(Node<UBERTrip> primero) {
+        public ListIterator(Node<Item> primero) {
             current = primero;
         }
 
@@ -130,9 +130,9 @@ public class Stack<UBERTrip> implements  IStack,Iterable<UBERTrip> {
             throw new UnsupportedOperationException();
         }
 
-        public UBERTrip next() {
+        public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            UBERTrip UBERTrip = current.UBERTrip;
+            Item UBERTrip = current.node;
             current = current.siguiente; 
             return UBERTrip;
         }

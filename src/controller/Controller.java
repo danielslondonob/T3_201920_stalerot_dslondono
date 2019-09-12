@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import model.data_structures.Queue;
 import model.logic.MVCModelo;
-import model.logic.Viaje;
 import view.MVCView;
 
 public class Controller {
@@ -29,12 +28,12 @@ public class Controller {
 		
 	public void run() 
 	{
-		try {
-			modelo.cargarArchivos();
-		} catch (IOException e) {
+		//try {
+			//modelo.cargarArchivos();
+		//} //catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			//e.printStackTrace();
+		//}
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
 		String dato = "";
@@ -50,7 +49,7 @@ public class Controller {
 				e.printStackTrace();
 			}
 
-			view.printMenu(modelo.darTamanoCola(), (Viaje[])modelo.primeroUltimo());
+			view.printMenu();
 
 			int option = lector.nextInt();
 			switch(option){
@@ -59,16 +58,16 @@ public class Controller {
 				int hora = lector.nextInt();
 
 
-				Queue cola= modelo.consulta1(hora);
+				//Queue cola= modelo.consulta1(hora);
 				
-				System.out.println("El número total de viajes del cluster más grande a partir de esa hora fue: "+ cola.size());
+				//System.out.println("El número total de viajes del cluster más grande a partir de esa hora fue: "+ cola.size());
 
-				Iterator iter= cola.iterator();
+				//Iterator iter= cola.iterator();
 
-				while(iter.hasNext())
+				//while(iter.hasNext())
 				{
-					Viaje actual= (Viaje)iter.next();
-					System.out.println("Hora: "+ actual.getHour()+" , Zona origen: "+ actual.getSourceID()+ " , Zona destino: "+ actual.getDstID() + " , Tiempo promedio: "+ actual.getMeanTravelTime());
+					//Viaje actual= (Viaje)iter.next();
+					//System.out.println("Hora: "+ actual.getHour()+" , Zona origen: "+ actual.getSourceID()+ " , Zona destino: "+ actual.getDstID() + " , Tiempo promedio: "+ actual.getMeanTravelTime());
 				}
 
 				break;
@@ -82,14 +81,14 @@ public class Controller {
 				System.out.println("Ingrese la cantidad de últimos viajes");
 				int n= lector.nextInt();
 
-				Queue colaViajes= modelo.consulta2(n, hora2);
+				//Queue colaViajes= modelo.consulta2(n, hora2);
 				
-				Iterator iter2=colaViajes.iterator();
+				//Iterator iter2=colaViajes.iterator();
 				
-				while(iter2.hasNext())
+				//while(iter2.hasNext())
 				{
-					Viaje actual= (Viaje)iter2.next();
-					System.out.println("Hora: "+ actual.getHour()+" , Zona origen: "+ actual.getSourceID()+ " , Zona destino: "+ actual.getDstID() + " , Tiempo promedio: "+ actual.getMeanTravelTime());
+					//Viaje actual= (Viaje)iter2.next();
+					//System.out.println("Hora: "+ actual.getHour()+" , Zona origen: "+ actual.getSourceID()+ " , Zona destino: "+ actual.getDstID() + " , Tiempo promedio: "+ actual.getMeanTravelTime());
 				}
 
 				break;	
