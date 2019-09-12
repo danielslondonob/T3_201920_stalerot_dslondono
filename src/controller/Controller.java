@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import model.data_structures.Queue;
 import model.logic.MVCModelo;
+import model.logic.UBERTrip;
 import view.MVCView;
 
 public class Controller {
@@ -28,16 +29,13 @@ public class Controller {
 		
 	public void run() 
 	{
-		//try {
-			//modelo.cargarArchivos();
-		//} //catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		//}
+		try {
+			modelo.cargarArchivos();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		String dato = "";
-		String respuesta = "";
 
 		while( !fin )
 		{
@@ -48,52 +46,83 @@ public class Controller {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			UBERTrip[]primeroUltimo=modelo.primeroUltimo();
 
-			view.printMenu();
+			view.printMenu(modelo.darTamanoLista(),primeroUltimo);
 
 			int option = lector.nextInt();
 			switch(option){
-			case 1:
-				System.out.println("--------- \nRealizar Consulta \nDar número de hora para empezar a consultar: ");
-				int hora = lector.nextInt();
-
-
-				//Queue cola= modelo.consulta1(hora);
+			case 1: 
 				
-				//System.out.println("El número total de viajes del cluster más grande a partir de esa hora fue: "+ cola.size());
-
-				//Iterator iter= cola.iterator();
-
-				//while(iter.hasNext())
-				{
-					//Viaje actual= (Viaje)iter.next();
-					//System.out.println("Hora: "+ actual.getHour()+" , Zona origen: "+ actual.getSourceID()+ " , Zona destino: "+ actual.getDstID() + " , Tiempo promedio: "+ actual.getMeanTravelTime());
-				}
 
 				break;
 
 
 			case 2: 
-				System.out.println("--------- \n Realizar consulta \n---------"); 
-				System.out.println("Ingrese una hora específica");
-				int hora2= lector.nextInt();
 				
-				System.out.println("Ingrese la cantidad de últimos viajes");
-				int n= lector.nextInt();
-
-				//Queue colaViajes= modelo.consulta2(n, hora2);
+				UBERTrip[] viajes=(UBERTrip[]) modelo.shellSort(modelo.consultarHoraDada(modelo.darNroHora()));
 				
-				//Iterator iter2=colaViajes.iterator();
+				//double tiempo=modelo.calcularTiempo();
+				System.out.println("Tiempo que utilizó el algoritmo: "+ tiempo);
 				
-				//while(iter2.hasNext())
+				
+				int i=1;
+				
+				while(i<10)
 				{
-					//Viaje actual= (Viaje)iter2.next();
-					//System.out.println("Hora: "+ actual.getHour()+" , Zona origen: "+ actual.getSourceID()+ " , Zona destino: "+ actual.getDstID() + " , Tiempo promedio: "+ actual.getMeanTravelTime());
+					System.out.println("Viaje numero: " + i+ "   tiempo promedio: "+ viajes[i].getMeanTravelTime());
+					i++;
+				}
+				
+				int j=viajes.length-10;
+				
+				while(j<viajes.length)
+				{
+					System.out.println("Viaje numero: " + j+ "   tiempo promedio: "+ viajes[j].getMeanTravelTime());
+					j++;
 				}
 
 				break;	
+				
+			case 3: 
+				
+				UBERTrip[] viajes=(UBERTrip[]) modelo.merge(modelo.consultarHoraDada(modelo.darNroHora()));
+				
+				//double tiempo=modelo.calcularTiempo();
+				System.out.println("Tiempo que utilizó el algoritmo: "+ tiempo);
+				
+				
+				i=1;
+				
+				while(i<10)
+				{
+					System.out.println("Viaje numero: " + i+ "   tiempo promedio: "+ viajes[i].getMeanTravelTime());
+					i++;
+				}
+				
+				j=viajes.length-10;
+				
+				while(j<viajes.length)
+				{
+					System.out.println("Viaje numero: " + j+ "   tiempo promedio: "+ viajes[j].getMeanTravelTime());
+					j++;
+				}
+				
 
-			case 3:
+
+				break;
+				
+			case 4: 
+
+
+				break;
+				
+			case 5: 
+
+
+				break;
+
+			case 6:
 				System.out.println("--------- \nHasta pronto! \n ");
 				lector.close();
 				fin = true;
