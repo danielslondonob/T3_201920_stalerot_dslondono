@@ -8,11 +8,8 @@ import java.util.Iterator;
 import com.opencsv.CSVReader;
 
 import model.data_structures.ArregloDinamico;
-import model.data_structures.IQueue;
-import model.data_structures.IStack;
 import model.data_structures.LinkedQueue;
 import model.data_structures.Queue;
-import model.data_structures.Stack;
 
 /**
  * Definicion del modelo del mundo
@@ -24,6 +21,7 @@ public class MVCModelo {
 	 */
 	private LinkedQueue lista;
 	private ArregloDinamico arreglo;
+	private Queue queue;
 	private int nroHora;
 
 	
@@ -34,6 +32,7 @@ public class MVCModelo {
 	{
 		lista = new LinkedQueue<UBERTrip>();
 		arreglo= new ArregloDinamico(10);
+		queue = new Queue();
 	}
 	
 
@@ -114,13 +113,126 @@ public class MVCModelo {
 		return datos;
 	}
 	
-	public Comparable[] consultarHoraDada(int hora)
+	public Comparable[] consultarHoraDada(Queue<UBERTrip> hora)
 	{
-		nroHora=hora;
-		//REALIZAR
-		return null;
+		Queue<UBERTrip> consultaPorHora(hora);
+		{
+			Queue colaModelo= colaAPartirDe(hora);
+			
+			Comparable[] clusterFinal= new Queue();
+			Queue clusterAuxiliar= new Queue();
+			
+			int horaMax=0;
+			
+			Iterator iter= colaModelo.iterator();
+			
+			while(iter.hasNext())
+			{
+				UBERTrip actual= (UBERTrip)iter.next();
+				
+				if(actual.getHod()>=horaMax)
+				{
+					horaMax=actual.getHod();
+					clusterAuxiliar.enqueue(actual);
+				}
+				else
+				{
+					if(clusterAuxiliar.size()>clusterFinal.size())
+					{
+						clusterFinal=clusterAuxiliar;
+					}
+					clusterAuxiliar= new Queue();
+					clusterAuxiliar.enqueue(actual);
+					horaMax=actual.getHod();
+				}
+			}
+			
+			return clusterFinal;
+		}
 		
 	}
+	
+	
+	public Queue<UBERTrip> colaAPartirDe(int hora)
+	{
+		Queue colaNueva= new Queue();
+		
+		Iterator iter= queue.iterator();
+		
+		boolean empezar=false;
+		
+		while(iter.hasNext())
+		{
+			UBERTrip actual= (UBERTrip)iter.next();
+			
+			
+			if(empezar)
+			{
+				colaNueva.enqueue(actual);
+			}
+			else if(actual.getHod()==hora)
+			{
+				empezar=true;
+				colaNueva.enqueue(actual);
+			}
+		}
+		
+		return colaNueva;
+	}
+	
+	public void ordenamientoQuickSort( int arr[], int inicio, int fin ) 
+	{
+		if( inicio < fin ) 
+		{
+			int indiceParticion = particion(arr, inicio, fin);
+			
+			ordenamientoQuickSort(arr, inicio, indiceParticion - 1);
+			
+			ordenamientoQuickSort(arr, indiceParticion + 1, fin );
+		}
+
+              //Calcular el tiempo
+		long comienzo = System.currentTimeMillis();
+
+	      long total = 0;
+	      for (int i = 0; i < 10000000; i++) {
+	         total += i;
+	      }
+
+	      long parada = System.currentTimeMillis();
+	      long tiempoCorrido = parada - comienzo;
+	      System.out.println(tiempoCorrido);
+		
+		
+	}
+	
+	private int particion( int arr[], int inicio, int fin ) 
+	{
+		int pivot = arr[fin];		
+		int i = inicio - 1;
+		
+		for( int j = inicio; j < fin; j++) 
+		{
+			if( arr[j] <= pivot ) 
+			{
+				i++;
+				int cambioTemporal = arr[i];
+				arr[i] = arr[j];
+				arr[j] = cambioTemporal;
+			}
+		}
+		
+		int cambioTemporal = arr[i+1];
+		arr[i+1] = arr[fin];
+		arr[fin] = cambioTemporal;
+		
+		return i+1; 
+		
+		
+	}
+	
+
+	
 	
 	
 	
